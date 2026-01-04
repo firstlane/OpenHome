@@ -11,3 +11,14 @@
     - Pokemon Types (select 2)
     - Show each Form of a Pokemon that I own
     - Show each Gender of a Pokemon that I own
+    - Hidden Abilities
+    - Egg Moves
+    - Pokerus
+    - Region
+    - Generation of Pokemon
+    - Generation caught in
+- [ ] Add ability to sort pokemon by these parameters:
+    - Total IVs
+    - Specific IV ranges per stat
+    - Total EVs
+    - Specific EV ranges per stat
