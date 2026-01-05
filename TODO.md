@@ -22,3 +22,4 @@
     - Specific IV ranges per stat
     - Total EVs
     - Specific EV ranges per stat
+- [ ] Add progress bar while searching for saves from Save Directories
