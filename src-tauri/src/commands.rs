@@ -142,18 +142,25 @@ pub fn find_suggested_saves(
     }
 
     // Iterate over user-provided save folders
+    println!("save_folder.len() = {}", save_folders.len());
     for folder in save_folders {
+        println!("1: {}", folder.to_str().unwrap_or("(no path)"));
         if folder.exists() {
+            println!("2: {}", folder.to_str().unwrap_or("(no path)"));
             let citra_saves = saves::recursively_find_citra_saves(&folder, 0)?;
+            println!("3: citra_saves.len() = {}", citra_saves.len());
             possible_saves.citra.extend(citra_saves);
 
             let mgba_saves = saves::recursively_find_mgba_saves(&folder, 0).unwrap_or_default();
+            println!("3: mbga_saves.len() = {}", mgba_saves.len());
             let gambatte_saves = saves::recursively_find_gambatte_saves(&folder, 0)?;
+            println!("3: gambatte_saves.len() = {}", gambatte_saves.len());
 
             possible_saves.open_emu.extend(mgba_saves);
             possible_saves.open_emu.extend(gambatte_saves);
 
             let desamume_saves = saves::recursively_find_desamume_saves(&folder, 0)?;
+            println!("3: desamume_saves.len() = {}", desamume_saves.len());
             possible_saves.desamume.extend(desamume_saves);
         } else {
             println!(

@@ -36,6 +36,11 @@ pub fn recursively_find_desamume_saves(
         }
     }
 
+    let inner_files = get_inner_files_with_extension(current_path, "dsv")
+        .into_iter()
+        .map(|path| parse_path_data(&path));
+    found_saves.extend(inner_files);
+
     Ok(found_saves)
 }
 
@@ -62,6 +67,11 @@ pub fn recursively_find_gambatte_saves(
         }
     }
 
+    let inner_files = get_inner_files_with_extensions(current_path, &["sav", "rtc"])
+        .into_iter()
+        .map(|path| parse_path_data(&path));
+    found_saves.extend(inner_files);
+
     Ok(found_saves)
 }
 
@@ -72,6 +82,10 @@ pub fn recursively_find_mgba_saves(current_path: &Path, depth: usize) -> Option<
 
     let mut found_saves = Vec::new();
     let inner_directory_paths = get_inner_directories(current_path);
+    println!(
+        "inner_directory_paths.len() = {}",
+        inner_directory_paths.len()
+    );
 
     for path in inner_directory_paths {
         if path.ends_with("Battery Saves") {
@@ -84,6 +98,11 @@ pub fn recursively_find_mgba_saves(current_path: &Path, depth: usize) -> Option<
             found_saves.extend(recursively_find_mgba_saves(&path, depth + 1)?);
         }
     }
+
+    let inner_files = get_inner_files_with_extension(current_path, "sav")
+        .into_iter()
+        .map(|path| parse_path_data(&path));
+    found_saves.extend(inner_files);
 
     Some(found_saves)
 }
@@ -109,6 +128,16 @@ pub fn recursively_find_citra_saves(
                 found_saves.push(parse_path_data(&entry_path));
             }
         }
+    }
+
+    if let Ok(dir_entries) = fs::read_dir(path) {
+        let inner_files: Vec<PathBuf> = dir_entries
+            .filter_map(|entry| entry.ok())
+            .map(|entry| entry.path())
+            .filter(|path| !path.is_dir() && path.ends_with("main"))
+            .collect();
+
+        found_saves.extend(inner_files.into_iter().map(|path| parse_path_data(&path)));
     }
 
     Ok(found_saves)

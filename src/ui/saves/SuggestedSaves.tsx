@@ -22,6 +22,8 @@ interface SaveFileSelectorProps {
 }
 
 export default function SuggestedSaves(props: SaveFileSelectorProps) {
+  console.debug("Inside SuggestedSaves")
+
   const { onOpen, view, cardSize } = props
   const backend = useContext(BackendContext)
   const [, , getEnabledSaveTypes] = useContext(AppInfoContext)
@@ -86,6 +88,8 @@ export default function SuggestedSaves(props: SaveFileSelectorProps) {
           const allPaths = (possibleSaves?.citra ?? [])
             .concat(possibleSaves?.open_emu ?? [])
             .concat(possibleSaves?.desamume ?? [])
+
+          console.log("allPaths.length = %d", allPaths.length)
 
           if (allPaths.length > 0) {
             const saves = (await Promise.all(allPaths.map((path) => loadSaveData(path)))).filter(
