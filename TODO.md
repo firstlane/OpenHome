@@ -23,3 +23,4 @@
     - Total EVs
     - Specific EV ranges per stat
 - [ ] Add progress bar while searching for saves from Save Directories
+- [ ] Allow location of save data for OpenHome to be portable
