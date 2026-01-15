@@ -2,6 +2,7 @@
 
 - [ ] Add ability to load all save files from a given directory.
 - [ ] Add ability to store OpenHome database elsewhere (such as on a remote NAS)
+- [ ] Add ability to have multiple filters active
 - [ ] Add ability to filter Pokemon similar to PKVault (Caught or Not Caught, Shiny or Not Shiny, etc.)
     - Species name (already implemented)
     - Seen / Not Seen
@@ -24,3 +25,4 @@
     - Specific EV ranges per stat
 - [ ] Add progress bar while searching for saves from Save Directories
 - [ ] Allow location of save data for OpenHome to be portable
+- [ ] Show legal abilities (normal and then hidden) first for the given species, then show hacked abilities
