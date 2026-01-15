@@ -291,6 +291,30 @@ export default function FilterPanel() {
             ) : undefined
           }
         />
+        <Autocomplete
+          options={[true, false]}
+          getOptionString={(opt) => opt ? "Has Hidden Ability" : "No Hidden Ability"}
+          getOptionUniqueID={(opt) => opt ? "Has Hidden Ability" : "No Hidden Ability"}
+          value={filter.hiddenAbility}
+          label="Hidden Ability"
+          onChange={(option) => setFilter({ hiddenAbility: option })}
+        />
+        <Autocomplete
+          options={['Amorphous', 'Bug', 'Dragon', 'Fairy', 'Field', 'Flying', 'Grass', 'HumanLike', 'Mineral', 'Monster', 'Water 1', 'Water 2', 'Water 3', 'Ditto', 'Undiscovered']}
+          getOptionString={(opt) => opt}
+          getOptionUniqueID={(opt) => opt}
+          value={filter.eggGroup}
+          label="Egg Group"
+          onChange={(option) => setFilter({ eggGroup: option })}
+        />
+        <Autocomplete
+          options={[true, false]}
+          getOptionString={(opt) => opt ? "Has Pokerus" : "No Pokerus"}
+          getOptionUniqueID={(opt) => opt ? "Has Pokerus" : "No Pokerus"}
+          value={filter.pokerus}
+          label="Pokerus"
+          onChange={(option) => setFilter({ pokerus: option })}
+        />
         <Button
           variant="outline"
           disabled={Object.values(filter).length === 0}

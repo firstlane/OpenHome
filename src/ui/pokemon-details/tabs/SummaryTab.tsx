@@ -156,6 +156,9 @@ const SummaryDisplay = (props: { mon: PKMInterface }) => {
         )}
         <AttributeRow label="Level">{mon.getLevel()}</AttributeRow>
         <AttributeRow label="EXP">{mon.exp}</AttributeRow>
+        <AttributeRow label="Egg Groups">
+          <div>{MetadataLookup(mon.dexNum, mon.formeNum)?.eggGroups.join(' • ')}</div>
+        </AttributeRow>
       </Flex>
     </Grid>
   )

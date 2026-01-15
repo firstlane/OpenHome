@@ -17,6 +17,9 @@ export interface Filter {
   ball?: number
   isEgg?: boolean
   shinyLeaves?: number
+  hiddenAbility?: boolean
+  eggGroup?: string
+  pokerus?: boolean
 }
 
 export type HeldItemFilter = number | HeldItemCategory
@@ -93,6 +96,39 @@ export function filterApplies(filter: Filter, mon: PKMInterface) {
   ) {
     return false
   }
+
+  if (filter.hiddenAbility !== undefined) {
+    if (filter.hiddenAbility) {
+      if (mon.ability?.index !== formeMetadata.hiddenAbility?.index) {
+        return false
+      }
+    }
+    else {
+      if (mon.ability?.index === formeMetadata.hiddenAbility?.index) {
+        return false;
+      }
+    }
+  }
+
+  if (filter.eggGroup !== undefined) {
+    if (!formeMetadata.eggGroups.includes(filter.eggGroup)) {
+      return false;
+    }
+  }
+
+  if (filter.pokerus !== undefined) {
+    if (filter.pokerus) {
+      if (mon.pokerusByte === undefined || mon.pokerusByte === 0) {
+        return false;
+      }
+    }
+    else {
+      if (mon.pokerusByte !== undefined && mon.pokerusByte !== 0) {
+        return false;
+      }
+    }
+  }
+
   return true
 }
 
