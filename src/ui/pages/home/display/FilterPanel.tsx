@@ -17,6 +17,7 @@ import {
   OriginGameWithData,
   SpeciesLookup,
 } from '@pkm-rs/pkg'
+import { EggGroups } from '@pokemon-resources/consts/EggGroups'
 import { OpenHomeRibbons } from '@pokemon-resources/consts/Ribbons'
 import { Types } from '@pokemon-resources/index'
 import { Button, Flex } from '@radix-ui/themes'
@@ -300,7 +301,7 @@ export default function FilterPanel() {
           onChange={(option) => setFilter({ hiddenAbility: option })}
         />
         <Autocomplete
-          options={['Amorphous', 'Bug', 'Dragon', 'Fairy', 'Field', 'Flying', 'Grass', 'HumanLike', 'Mineral', 'Monster', 'Water 1', 'Water 2', 'Water 3', 'Ditto', 'Undiscovered']}
+          options={EggGroups}
           getOptionString={(opt) => opt}
           getOptionUniqueID={(opt) => opt}
           value={filter.eggGroup}
