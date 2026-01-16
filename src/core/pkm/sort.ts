@@ -1,6 +1,7 @@
 import { PKMInterface } from '@openhome-core/pkm/interfaces'
 import { Ball, Gender } from '@pkm-rs/pkg'
 import { PKM } from '@pokemon-files/pkm'
+import { Stats, statsTotal } from '@pokemon-files/util/types'
 import { getDisplayID } from '@pokemon-files/util/util'
 import dayjs from 'dayjs'
 import { getBaseMon } from './util'
@@ -20,6 +21,7 @@ export const SortTypes = [
   'Held Item',
   'Is Egg',
   'Shiny Leaves',
+  'Total IVs',
 ]
 
 export type SortType = (typeof SortTypes)[number]
@@ -133,6 +135,18 @@ export function getSortFunction(
         (a.shinyLeaves?.hasCrown() ? 6 : (a.shinyLeaves?.count() ?? 0))
     case 'Held Item':
       return sortByHeldItem
+    case 'Total IVs':
+      return (a, b) => {
+        const emptyStats: Stats = {
+          hp: 0,
+          atk: 0,
+          def: 0,
+          spa: 0,
+          spd: 0,
+          spe: 0,
+        }
+        return statsTotal(b.ivs ?? emptyStats) - statsTotal(a.ivs ?? emptyStats)
+      }
     default:
       return () => {
         console.error('unrecognized sort term:', sortStr)

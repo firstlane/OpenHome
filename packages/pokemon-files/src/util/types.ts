@@ -41,6 +41,10 @@ export interface Stats {
   spe: number
 }
 
+export function statsTotal(stats: Stats): number {
+  return stats.hp + stats.atk + stats.def + stats.spa + stats.spd + stats.spe
+}
+
 export function isStandardStats(stats?: object): stats is Stats {
   return (
     stats !== undefined &&
